@@ -1,20 +1,69 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<div class="main">
+  <div class="header">
+    <img src="../assets/Images/‏‏logo.PNG">
+  
+  </div>
+    <form class="formlog">
+        <mat-form-field dir="rtl">
+          <input matInput type="email" 
+          [(ngModel)]="loginData.UserName"
+          name="UserName" 
+          placeholder="שם משתמש"
+          [formControl]="emailFormControl"
+          [errorStateMatcher]="matcher"
+          />
+          <img class="mat-form-img" src="../assets/Images/contacts-social-network.png">
+          <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+              שם המשתמש שהזנת שגוי
+            </mat-error>
+            <mat-error *ngIf="emailFormControl.hasError('required')">
+                <strong>שדה חובה</strong>
+              </mat-error>
+        </mat-form-field>
 
+        <mat-form-field>
+          <input matInput
+           type="password"
+            name="Password" 
+            [(ngModel)]="loginData.Password" 
+            placeholder="סיסמא"
+            [formControl]="passwordFormControl"
+            />
+            <img class="mat-form-img" src="../assets/Images/lock.png">
+
+          <mat-error *ngIf="passwordFormControl.hasError('minlength') && !passwordFormControl.hasError('required')">
+             אורך הסיסמא 6 תווים לפחות
+            </mat-error>
+            <mat-error *ngIf="passwordFormControl.hasError('required')">
+                <strong>שדה חובה</strong>
+              </mat-error>
+        </mat-form-field>
+        <button class="login-btn" 
+        (click)="login()"
+         mat-raised-button 
+         color="primary"
+         [disabled]="countErrors >= 3"
+         >
+         התחבר</button>
+        <mat-checkbox class="login-checkbox" name="RememberMe" [(ngModel)]="loginData.RememberMe">זכור אותי ממחשב זה</mat-checkbox>
+
+        <mat-error *ngIf="isUserValid === false">
+            <strong>שם המשתש ו/או הסיסמה שגויים</strong>
+          </mat-error>
+          <strong style="color:rgb(91, 209, 36);" *ngIf="isUserValid === true">התחבר בהצלחה</strong>
+         
+          <mat-error *ngIf="countErrors >= 3">
+            <strong>משתמש חסום</strong>
+          </mat-error>
+      </form>
+</div>
+<div class="contact-us">
+    <div>?אין לך חשבון משתמש</div>
+    <div class="text-bold">
+      צור איתנו קשר
+    <br>
+    1-700-11-22-33
+    </div>
+</div>
+<p>'כל הזכויות שמורות לג'אסט מאנאג	&copy;</p>
